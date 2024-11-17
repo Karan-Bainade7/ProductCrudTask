@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ProjectName.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<div class="pagination">
+    @if (ViewBag.CurrentPage > 1)
+    {
+<a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">Previous</a>            }
+
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        if (i == ViewBag.CurrentPage)
+        {
+<span class="current-page">@i</span> }
+                else
+                {
+<a href="@Url.Action("Index", new { page = i })">@i</a>                }
+            }
+
+    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+    {
+<a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })">Next</a>            }
+</div>
+    </div>
+</body>
+</html>
